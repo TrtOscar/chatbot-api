@@ -1,11 +1,10 @@
 package com.trt.chatbot.api.test;
 
 import com.alibaba.fastjson.JSON;
+import com.trt.chatbot.api.domain.ai.IOpenAI;
 import com.trt.chatbot.api.domain.zsxq.IZsxqApi;
 import com.trt.chatbot.api.domain.zsxq.model.aggregates.UnAnsweredQuestionAggregates;
-import com.trt.chatbot.api.domain.zsxq.model.vo.Question;
 import com.trt.chatbot.api.domain.zsxq.model.vo.Topics;
-import com.trt.chatbot.api.domain.zsxq.service.ZsxqApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest()
+@SpringBootTest
 public class SpringBootRunTest {
 
     private Logger logger = LoggerFactory.getLogger(SpringBootRunTest.class);
@@ -31,6 +30,8 @@ public class SpringBootRunTest {
 
     @Resource
     private IZsxqApi zsxqApi;
+    @Resource
+    private IOpenAI openAI;
 
     @Test
     public void test_zsxqApi() throws IOException {
@@ -44,7 +45,13 @@ public class SpringBootRunTest {
             logger.info("topicId：{} text：{}", topicId, text);
 
             //回答问题
-            zsxqApi.answer(groupId,cookie,topicId,text,false);
+            zsxqApi.answer(groupId, cookie, topicId, text, false);
         }
     }
+
+    public void test_openAi() throws IOException {
+        String response = openAI.doChatGPT("帮我用Java写一个冒泡排序");
+        logger.info("测试结果：{}", response);
+    }
+
 }
