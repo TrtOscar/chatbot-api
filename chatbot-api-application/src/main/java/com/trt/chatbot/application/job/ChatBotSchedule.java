@@ -50,7 +50,7 @@ public class ChatBotSchedule {
 
             //1.检索问题
             UnAnsweredQuestionAggregates unAnsweredQuestionAggregates = zsxqApi.queryUnAnsweredQuestionTopicID(groupId, cookie);
-            logger.info("测试结果：{}", JSON.toJSON(unAnsweredQuestionAggregates));
+            logger.info("问题检索：{}", JSON.toJSON(unAnsweredQuestionAggregates));
             List<Topics> topics = unAnsweredQuestionAggregates.getResp_data().getTopics();
             if (null == topics || topics.isEmpty()) {
                 logger.info("本次检索未查询到待回答问题");
