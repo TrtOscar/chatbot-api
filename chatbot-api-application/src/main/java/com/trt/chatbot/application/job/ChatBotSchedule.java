@@ -35,20 +35,22 @@ public class ChatBotSchedule {
     @Resource
     private IOpenAI openAI;
 
-    @Scheduled(cron = "0 0/1  * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void run() {
         try {
             if (new Random().nextBoolean()) {
                 logger.info("随机开摆...");
                 return;
             }
-
+/*
             GregorianCalendar calendar = new GregorianCalendar();
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
             if (hour > 22 || hour < 4) {
                 logger.info("AI下班了");
                 return;
             }
+
+ */
 
             //1.检索问题
             UnAnsweredQuestionAggregates unAnsweredQuestionAggregates = zsxqApi.queryUnAnsweredQuestionTopicID(groupId, cookie);

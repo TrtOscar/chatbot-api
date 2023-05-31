@@ -14,7 +14,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,9 +22,6 @@ import java.util.List;
 @Service
 public class OpenAI implements IOpenAI {
     private Logger logger = LoggerFactory.getLogger(OpenAI.class);
-
-    @Value("${chatbot-api.openAiKey}")
-    private String openAiKey;
 
     @Override
     public String doChatGPT(String openAiKey,String question) throws IOException {
@@ -44,6 +40,7 @@ public class OpenAI implements IOpenAI {
 
         StringEntity stringEntity = new StringEntity(paramJson, ContentType.create("text/json", "UTF-8"));
         post.setEntity(stringEntity);
+
         CloseableHttpResponse response = httpClient.execute(post);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             String jsonStr = EntityUtils.toString(response.getEntity());
