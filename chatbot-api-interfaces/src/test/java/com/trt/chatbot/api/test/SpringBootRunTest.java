@@ -27,6 +27,8 @@ public class SpringBootRunTest {
     private String groupId;
     @Value("${chatbot-api.cookie}")
     private String cookie;
+    @Value("${chatbot-api.openAiKey}")
+    private String openAiKey;
 
     @Resource
     private IZsxqApi zsxqApi;
@@ -45,12 +47,13 @@ public class SpringBootRunTest {
             logger.info("topicId：{} text：{}", topicId, text);
 
             //回答问题
-            zsxqApi.answer(groupId, cookie, topicId, text, false);
+            zsxqApi.answer(groupId, cookie, topicId, openAI.doChatGPT(openAiKey, text), false);
         }
     }
 
+    @Test
     public void test_openAi() throws IOException {
-        String response = openAI.doChatGPT("帮我用Java写一个冒泡排序");
+        String response = openAI.doChatGPT(openAiKey, "请简要介绍NFA和DFA");
         logger.info("测试结果：{}", response);
     }
 

@@ -28,7 +28,7 @@ public class OpenAI implements IOpenAI {
     private String openAiKey;
 
     @Override
-    public String doChatGPT(String question) throws IOException {
+    public String doChatGPT(String openAiKey,String question) throws IOException {
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 

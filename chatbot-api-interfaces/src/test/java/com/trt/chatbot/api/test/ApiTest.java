@@ -72,11 +72,11 @@ public class ApiTest {
 
         HttpPost post=new HttpPost("https://api.openai.com/v1/chat/completions");
         post.addHeader("Content-Type"," application/json");
-        post.addHeader("Authorization","Bearer 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");
+        post.addHeader("Authorization","Bearer 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");
 
         String paramJson="{\n" +
                 "     \"model\": \"gpt-3.5-turbo\",\n" +
-                "     \"messages\": [{\"role\": \"user\", \"content\": \"帮我写一个Java冒泡排序\"}],\n" +
+                "     \"messages\": [{\"role\": \"user\", \"content\": \"请简要介绍NFA和DFA\"}],\n" +
                 "     \"temperature\": 0.7\n" +
                 "   }";
 

@@ -27,6 +27,8 @@ public class ChatBotSchedule {
     private String groupId;
     @Value("${chatbot-api.cookie}")
     private String cookie;
+    @Value("${chatbot-api.openAiKey}")
+    private String openAiKey;
 
     @Resource
     private IZsxqApi zsxqApi;
@@ -58,7 +60,7 @@ public class ChatBotSchedule {
             }
             //2.AI回答
             Topics topic = topics.get(0);
-            String answer = openAI.doChatGPT(topic.getQuestion().getText().trim());
+            String answer = openAI.doChatGPT(openAiKey, topic.getQuestion().getText().trim());
             //3.问题回复
             boolean status = zsxqApi.answer(groupId, cookie, topic.getTopic_id(), answer, false);
             logger.info("编号:{}问题:{}回答:{}状态:{}", topic.getTopic_id(), topic.getQuestion().getText(), answer, status);
